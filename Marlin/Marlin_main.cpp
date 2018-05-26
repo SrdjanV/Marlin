@@ -9547,13 +9547,13 @@ inline void gcode_M400() { stepper.synchronize(); }
         // and block if probe is not deployed
     #define MSG_WAIT_PROBE_DEPLOYED "Wait probe deployment"
      boolean probestate=true,probe_msg=true;
-  
+
      while(probestate){
-      #if HAS_Z_MIN
+      #if Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
         probestate=READ(Z_MIN_PIN)^Z_MIN_ENDSTOP_INVERTING;
       #endif
-      #ifdef Z_PROBE_ENDSTOP
-        probestate=READ(Z_PROBE_PIN)^Z_PROBE_ENDSTOP_INVERTING;
+      #ifdef Z_MIN_PROBE_ENDSTOP
+        probestate=READ(Z_MIN_PROBE_PIN)^Z_MIN_PROBE_ENDSTOP_INVERTING;
       #endif
   
       if (probestate && probe_msg){      // send waiting message once                        
@@ -9587,11 +9587,11 @@ inline void gcode_M400() { stepper.synchronize(); }
      boolean probestate=false,probe_msg=true;
   
      while( ! probestate){
-      #if HAS_Z_MIN
+      #if Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
         probestate=READ(Z_MIN_PIN)^Z_MIN_ENDSTOP_INVERTING;
       #endif
-      #ifdef Z_PROBE_ENDSTOP
-        probestate=READ(Z_PROBE_PIN)^Z_PROBE_ENDSTOP_INVERTING;
+      #ifdef Z_MIN_PROBE_ENDSTOP
+        probestate=READ(Z_MIN_PROBE_PIN)^Z_MIN_PROBE_ENDSTOP_INVERTING;
       #endif
   
       if (! probestate && probe_msg){      // send waiting message once                        
