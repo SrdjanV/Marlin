@@ -9583,7 +9583,7 @@ inline void gcode_M400() { stepper.synchronize(); }
     //stow_z_probe(false);
     STOW_PROBE();
    // and block if probe is not stowed
-    #define MSG_WAIT_PROBE_DEPLOYED "Wait probe stowed"
+    #define MSG_WAIT_PROBE_STOWED "Wait probe stowed"
      boolean probestate=false,probe_msg=true;
   
      while( ! probestate){
@@ -9595,9 +9595,9 @@ inline void gcode_M400() { stepper.synchronize(); }
       #endif
   
       if (! probestate && probe_msg){      // send waiting message once                        
-        LCD_MESSAGEPGM(MSG_WAIT_PROBE_DEPLOYED);
+        LCD_MESSAGEPGM(MSG_WAIT_PROBE_STOWED);
         SERIAL_ECHO_START();
-        SERIAL_ECHOLNPGM(MSG_WAIT_PROBE_DEPLOYED);
+        SERIAL_ECHOLNPGM(MSG_WAIT_PROBE_STOWED);
         probe_msg=false;
       }
       idle();
