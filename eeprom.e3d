@@ -1,0 +1,33 @@
+ 
+14:47:57.507 : N1390 M503*30
+14:47:57.530 : echo:  G21    ; Units in mm
+14:47:57.530 : echo:  M149 C ; Units in Celsius
+14:47:57.530 : echo:Filament settings: Disabled
+14:47:57.530 : echo:  M200 D1.75
+14:47:57.530 : echo:  M200 D0
+14:47:57.531 : echo:Steps per unit:
+14:47:57.531 : echo:  M92 X80.00 Y80.00 Z2560.00 E195.28
+14:47:57.531 : echo:Maximum feedrates (units/s):
+14:47:57.531 : echo:  M203 X400.00 Y400.00 Z3.00 E200.00
+14:47:57.531 : echo:Maximum Acceleration (units/s2):
+14:47:57.531 : echo:  M201 X1400 Y1400 Z100 E80000
+14:47:57.531 : echo:Acceleration (units/s2): P<print_accel> R<retract_accel> T<travel_accel>
+14:47:57.531 : echo:  M204 P1400.00 R5000.00 T1400.00
+14:47:57.557 : echo:Advanced: S<min_feedrate> T<min_travel_feedrate> B<min_segment_time_us> X<max_xy_jerk> Z<max_z_jerk> E<max_e_jerk>
+14:47:57.557 : echo:  M205 S0.00 T0.00 B20000 X10.00 Y10.00 Z0.30 E80.00
+14:47:57.557 : echo:Home offset:
+14:47:57.557 : echo:  M206 X0.00 Y0.00 Z0.00
+14:47:57.557 : echo:Unified Bed Leveling:
+14:47:57.557 : echo:  M420 S1 Z0.60
+14:47:57.558 : Unified Bed Leveling System v1.01 active.
+14:47:57.617 : Active Mesh Slot: 0
+14:47:57.618 : EEPROM can hold 32 meshes.
+14:47:57.618 : echo:Material heatup parameters:
+14:47:57.618 : echo:  M145 S0 H180 B55 F0
+14:47:57.618 : echo:  M145 S1 H220 B110 F0
+14:47:57.618 : echo:PID settings:
+14:47:57.619 : echo:  M301 P19.86 I1.00 D98.93
+14:47:57.619 : echo:Z-Probe Offset (mm):
+14:47:57.619 : echo:  M851 Z-5.73
+14:47:57.619 : echo:Linear Advance:
+14:47:57.619 : echo:  M900 K0.00 R0.00
