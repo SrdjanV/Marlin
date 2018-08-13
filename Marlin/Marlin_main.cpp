@@ -9565,6 +9565,12 @@ inline void gcode_M400() { stepper.synchronize(); }
       }
       idle();
      }
+     
+     millis_t codenum = 2500;
+     codenum += millis();  // keep track of when we started waiting
+
+     while (millis() < codenum) idle();
+      
      SERIAL_ECHOLNPGM(MSG_ZPROBE_OUT);
      LCD_MESSAGEPGM(MSG_ZPROBE_OUT);
   }
