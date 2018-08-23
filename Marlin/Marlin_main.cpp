@@ -10010,7 +10010,39 @@ inline void gcode_M400() { planner.synchronize(); }
    * M401: Deploy and activate the Z probe
    */
   inline void gcode_M401() {
+    #if HAS_SERVO_ENDSTOPS
+      raise_z_for_servo();
+    #endif
     DEPLOY_PROBE();
+// and block if probe is not deployed
+    #define MSG_WAIT_PROBE_DEPLOYED "Wait probe deployment"
+     boolean probestate=true,probe_msg=true;
+
+     while(probestate){
+      #if Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+        probestate=READ(Z_MIN_PIN)^Z_MIN_ENDSTOP_INVERTING;
+      #endif
+      #ifdef Z_MIN_PROBE_ENDSTOP
+        probestate=READ(Z_MIN_PROBE_PIN)^Z_MIN_PROBE_ENDSTOP_INVERTING;
+      #endif
+  
+      if (probestate && probe_msg){      // send waiting message once                        
+        LCD_MESSAGEPGM(MSG_WAIT_PROBE_DEPLOYED);
+        //SERIAL_ECHO_START;
+        SERIAL_ECHO_START();
+        SERIAL_ECHOLNPGM(MSG_WAIT_PROBE_DEPLOYED);
+        probe_msg=false;
+      }
+      idle();
+     }
+     
+     millis_t codenum = 2500;
+     codenum += millis();  // keep track of when we started waiting
+
+     while (millis() < codenum) idle();
+      
+     SERIAL_ECHOLNPGM(MSG_ZPROBE_OUT);
+     LCD_MESSAGEPGM(MSG_ZPROBE_OUT);
     report_current_position();
   }
 
@@ -10018,11 +10050,45 @@ inline void gcode_M400() { planner.synchronize(); }
    * M402: Deactivate and stow the Z probe
    */
   inline void gcode_M402() {
-    STOW_PROBE();
-    #ifdef Z_AFTER_PROBING
-      move_z_after_probing();
+    #if HAS_SERVO_ENDSTOPS
+      raise_z_for_servo();
     #endif
-    report_current_position();
+    //stow_z_probe(false);
+    STOW_PROBE();
+   // and block if probe is not stowed
+    #define MSG_WAIT_PROBE_STOWED "Wait probe stowed"
+     boolean probestate=false,probe_msg=true;
+  
+     while( ! probestate){
+      #if Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+        probestate=READ(Z_MIN_PIN)^Z_MIN_ENDSTOP_INVERTING;
+      #endif
+      #ifdef Z_MIN_PROBE_ENDSTOP
+        probestate=READ(Z_MIN_PROBE_PIN)^Z_MIN_PROBE_ENDSTOP_INVERTING;
+      #endif
+  
+      if (! probestate && probe_msg){      // send waiting message once                        
+        LCD_MESSAGEPGM(MSG_WAIT_PROBE_STOWED);
+        SERIAL_ECHO_START();
+        SERIAL_ECHOLNPGM(MSG_WAIT_PROBE_STOWED);
+        probe_msg=false;
+      }
+      idle();
+     }
+     // add a waiting tiile to secure the probe
+     if (! probe_msg){
+      millis_t codenum = 3500;
+      codenum += millis();  // keep track of when we started waiting
+
+     while (millis() < codenum) idle();
+      ;
+     }
+     SERIAL_ECHOLNPGM(WELCOME_MSG);
+     LCD_MESSAGEPGM(WELCOME_MSG);
+     #ifdef Z_AFTER_PROBING
+       move_z_after_probing();
+     #endif
+     report_current_position();
   }
 
 #endif // HAS_BED_PROBE
