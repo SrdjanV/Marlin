@@ -124,6 +124,7 @@
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
+  //#define MOTHERBOARD BOARD_RAMPS_14_EFB
   #define MOTHERBOARD BOARD_GT2560_REV_A
 #endif
 
@@ -1006,7 +1007,7 @@ Z_MAX - PC5
  * Normally G28 leaves leveling disabled on completion. Enable
  * this option to have G28 restore the prior leveling state.
  */
-//#define RESTORE_LEVELING_AFTER_G28
+#define RESTORE_LEVELING_AFTER_G28
 
 /**
  * Enable detailed logging of G28, G29, M48, etc.
