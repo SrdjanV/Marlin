@@ -788,6 +788,10 @@
   //#define MESH_MIN_Y MESH_INSET
   //#define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
   //#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
+  //#define MESH_MIN_X 0
+  //#define MESH_MIN_Y 0
+  //#define MESH_MAX_X X_BED_SIZE - (X_PROBE_OFFSET_FROM_EXTRUDER)
+  //#define MESH_MAX_Y Y_BED_SIZE - (Y_PROBE_OFFSET_FROM_EXTRUDER)
 #endif
 
 // @section extras
