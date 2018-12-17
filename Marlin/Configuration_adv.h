@@ -331,15 +331,18 @@
   #endif
 #endif
 
-// Enable this for dual x-carriage printers.
-// A dual x-carriage design has the advantage that the inactive extruder can be parked which
-// prevents hot-end ooze contaminating the print. It also reduces the weight of each x-carriage
-// allowing faster printing speeds. Connect your X2 stepper to the first unused E plug.
+/**
+ * Dual X Carriage
+ *
+ * This setup has two X carriages that can move independently, each with its own hotend.
+ * The carriages can be used to print an object with two colors or materials, or in
+ * "duplication mode" it can print two identical or X-mirrored objects simultaneously.
+ * The inactive carriage is parked automatically to prevent oozing.
+ * X1 is the left carriage, X2 the right. They park and home at opposite ends of the X axis.
+ * By default the X2 stepper is assigned to the first unused E plug on the board.
+ */
 //#define DUAL_X_CARRIAGE
 #if ENABLED(DUAL_X_CARRIAGE)
-  // Configuration for second X-carriage
-  // Note: the first x-carriage is defined as the x-carriage which homes to the minimum endstop;
-  // the second x-carriage always homes to the maximum endstop.
   #define X1_MIN_POS X_MIN_POS  // set minimum to ensure first x-carriage doesn't hit the parked second X-carriage
   #define X1_MAX_POS X_BED_SIZE // set maximum to ensure first x-carriage doesn't hit the parked second X-carriage
   #define X2_MIN_POS 80     // set minimum to ensure second x-carriage doesn't hit the parked first X-carriage
@@ -382,7 +385,7 @@
 #define X_HOME_BUMP_MM 5
 #define Y_HOME_BUMP_MM 5
 #define Z_HOME_BUMP_MM 2
-#define HOMING_BUMP_DIVISOR { 2, 2, 4 }  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
+#define HOMING_BUMP_DIVISOR { 4, 4, 4 }  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 //#define QUICK_HOME                     // If homing includes X and Y, do a diagonal move initially
 
 // When G28 is called, this option will make Y home before X
@@ -533,7 +536,7 @@
 //#define LCD_TIMEOUT_TO_STATUS 15000
 
 // Add an 'M73' G-code to set the current percentage
-//#define LCD_SET_PROGRESS_MANUALLY
+#define LCD_SET_PROGRESS_MANUALLY
 
 #if ENABLED(SDSUPPORT) || ENABLED(LCD_SET_PROGRESS_MANUALLY)
   //#define LCD_PROGRESS_BAR              // Show a progress bar on HD44780 LCDs for SD printing
@@ -638,7 +641,7 @@
   //#define LONG_FILENAME_HOST_SUPPORT
 
   // Enable this option to scroll long filenames in the SD card menu
-  //#define SCROLL_LONG_FILENAMES
+  #define SCROLL_LONG_FILENAMES
 
   /**
    * This option allows you to abort SD printing when any endstop is triggered.
@@ -741,13 +744,13 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define BABYSTEP_XY              // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false    // Change if Z babysteps should go the other way
   #define BABYSTEP_MULTIPLICATOR 1   // Babysteps are very small. Increase for faster motion.
-  //#define BABYSTEP_ZPROBE_OFFSET   // Enable to combine M851 and Babystepping
-  //#define DOUBLECLICK_FOR_Z_BABYSTEPPING // Double-click on the Status Screen for Z Babystepping.
+  #define BABYSTEP_ZPROBE_OFFSET   // Enable to combine M851 and Babystepping
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING // Double-click on the Status Screen for Z Babystepping.
   #define DOUBLECLICK_MAX_INTERVAL 1250 // Maximum interval between clicks, in milliseconds.
                                         // Note: Extra time may be added to mitigate controller latency.
   //#define BABYSTEP_ZPROBE_GFX_OVERLAY // Enable graphical overlay on Z-offset editor
@@ -773,7 +776,7 @@
  */
 //#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
-  #define LIN_ADVANCE_K 0.22  // Unit: mm compression per 1mm/s extruder speed
+  #define LIN_ADVANCE_K 0.25  // Unit: mm compression per 1mm/s extruder speed
   //#define LA_DEBUG          // If enabled, this will generate debug information output over USB.
 #endif
 
@@ -785,6 +788,10 @@
   //#define MESH_MIN_Y MESH_INSET
   //#define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
   //#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
+  #define MESH_MIN_X X_PROBE_OFFSET_FROM_EXTRUDER
+  #define MESH_MIN_Y Y_PROBE_OFFSET_FROM_EXTRUDER
+  #define MESH_MAX_X X_BED_SIZE 
+  #define MESH_MAX_Y Y_BED_SIZE
 #endif
 
 // @section extras
