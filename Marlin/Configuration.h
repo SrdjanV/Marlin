@@ -141,7 +141,7 @@
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
-//#define MACHINE_UUID "00000000-0000-0000-0000-000000000002"
+//#define MACHINE_UUID "00000000-0000-0000-0000-000000000003"
 
 // @section extruder
 
@@ -576,7 +576,7 @@
  */
 #define X_DRIVER_TYPE  A4988
 #define Y_DRIVER_TYPE  A4988
-#define Z_DRIVER_TYPE  A4988
+#define Z_DRIVER_TYPE  DRV8825
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
@@ -642,7 +642,6 @@ Z_MAX - PC5
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 195.28 }
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 1600, 195.28 }
 
 /**
@@ -650,8 +649,7 @@ Z_MAX - PC5
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-//#define DEFAULT_MAX_FEEDRATE          { 400, 400, 3, 200 }
-#define DEFAULT_MAX_FEEDRATE          { 400, 400, 6, 200 }
+#define DEFAULT_MAX_FEEDRATE          { 400, 400, 8, 200 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -818,7 +816,7 @@ Z_MAX - PC5
  */
 #define X_PROBE_OFFSET_FROM_EXTRUDER 0  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 25  // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -1.7   // Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER -2.0   // Z offset: -below +above  [the nozzle]
 
 // Certain types of probes need to stay away from edges
 #define MIN_PROBE_EDGE 0
@@ -826,7 +824,8 @@ Z_MAX - PC5
 #define XY_PROBE_SPEED 24000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z*2
+//#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z*2
+#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Feedrate (mm/m) for the "accurate" probe of each point
 //#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
@@ -1196,7 +1195,7 @@ Z_MAX - PC5
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (60*60)
 //#define HOMING_FEEDRATE_Z  (4*60)
-#define HOMING_FEEDRATE_Z  (7*60)
+#define HOMING_FEEDRATE_Z  (8*60)
 
 // @section calibrate
 
