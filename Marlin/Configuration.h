@@ -642,7 +642,7 @@ Z_MAX - PC5
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 1600, 195.28 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 3200, 195.28 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -828,8 +828,7 @@ Z_MAX - PC5
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Feedrate (mm/m) for the "accurate" probe of each point
-//#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
@@ -1195,7 +1194,7 @@ Z_MAX - PC5
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (60*60)
 //#define HOMING_FEEDRATE_Z  (4*60)
-#define HOMING_FEEDRATE_Z  (8*60)
+#define HOMING_FEEDRATE_Z  (4*60)
 
 // @section calibrate
 
